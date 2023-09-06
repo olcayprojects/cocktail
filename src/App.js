@@ -1,23 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useCallback, useEffect } from "react";
+import Random from "./components/Random.jsx";
+import ListFirstLetter from "./components/ListFirstLetter.jsx";
+import Categories from "./components/Categories.jsx";
+import Glases from "./components/Glases.jsx";
+import Ingredients from "./components/Ingredients.jsx";
+import Alcoholic from "./components/Alcoholic.jsx";
+
+import "./App.css";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+
+      {/* <Alcoholic />
+      <Ingredients />
+      <Glases />
+      <Categories /> */}
+      <ListFirstLetter />
+      {/* <Random /> */}
     </div>
   );
 }

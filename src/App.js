@@ -11,7 +11,6 @@ import "./App.css";
 function App() {
   return (
     <div>
-
       {/* <Alcoholic />
       <Ingredients />
       <Glases />

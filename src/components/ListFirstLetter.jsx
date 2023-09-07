@@ -42,39 +42,62 @@ const ListFirstLetter = () => {
 
   return (
     <div className="container-fluid m-2 bg-black">
+      <h6 className="text-center text-light bg-black">TheCocktailDB free JSON API</h6>
       <div className="indexContainer">
         <CocktailIndex alphaIndex={(alpa) => setIndex(alpa)} />
       </div>
 
-      <h1 className="text-center text-warning bg-black">List First Letter</h1>
+      <h1 className="text-center text-light bg-black">List First Letter</h1>
       <div className="row row-cols-1 row-cols-md-3 justify-content-md-center">
         {data?.map((cocktail) => (
           <div key={cocktail.idDrink} className="col p-2">
             <div className="card h-100 pt-2">
-              <img className="card-img-top img-thumbnail" src={cocktail.strDrinkThumb+"/preview"} alt="" />
+              <img
+                className="card-img-top img-thumbnail"
+                src={cocktail.strDrinkThumb + "/preview"}
+                alt=""
+              />
               {/* <img className="card-img-top" src="test.jpeg" alt="" /> */}
               <div className="card-body">
-              <div className="card-img-overlay">
-                <h2 className="card-title text-center text-info bg-black opacity-75">
-                  {cocktail.strDrink}
-                </h2>
+                <div className="card-img-overlay">
+                  <h1 className="card-title text-center text-info bg-black opacity-75">
+                    {cocktail.strDrink}
+                  </h1>
                 </div>
 
-                <h6 className="card-title text-warning">Tags: {cocktail.strTags}</h6>
-                <h6 className="card-title text-warning">Category: {cocktail.strCategory}</h6>
-                <h6 className="card-title text-warning">IBA: {cocktail.strIBA}</h6>
                 <h6 className="card-title text-warning">
-                  Alcoholic: {cocktail.strAlcoholic}
+                  <span className="text-danger">Tags: </span>
+                  {cocktail.strTags ? cocktail.strTags :"No Tags" }
                 </h6>
-                <h6 className="card-title text-warning">Glass: {cocktail.strGlass}</h6>
+                <h6 className="card-title text-warning">
+                  <span className="text-danger">Category: </span>
+                  {cocktail.strCategory}
+                </h6>
+                <h6 className="card-title text-warning">
+                  <span className="text-danger">IBA: </span>
+                  {cocktail.strIBA}
+                </h6>
+                <h6 className="card-title text-warning">
+                  <span className="text-danger">Alcoholic: </span>
+                  {cocktail.strAlcoholic}
+                </h6>
+                <h6 className="card-title text-warning">
+                  <span className="text-danger">Glass: </span>
+                  {cocktail.strGlass}
+                </h6>
                 <hr />
-                <h6 className="card-title text-info text-center fw-bold">Ingredient</h6>
+                <h5 className="card-title text-info text-center fw-bold text-decoration-underline text-uppercase">
+                  Ingredients
+                </h5>
 
                 <ul className="list-group">
                   {[...Array(15)].map((x, i) =>
                     cocktail["strIngredient" + (i + 1)] ? (
-                      <li key={i} className="list-group-item  text-success">
-                        {(cocktail["strMeasure" + (i + 1)] !== "null"
+                      <li
+                        key={i}
+                        className="list-group-item fw-bold text-success"
+                      >
+                        {(cocktail["strMeasure" + (i + 1)] !== null
                           ? cocktail["strMeasure" + (i + 1)]
                           : "") +
                           " " +
@@ -86,20 +109,27 @@ const ListFirstLetter = () => {
                   )}
                 </ul>
                 <div className="card-footer">
+                  <h5 className="card-title text-info text-center fw-bold text-decoration-underline text-uppercase">
+                    Instructions
+                  </h5>
                   <h6 className="text-center bg-black">EN</h6>
-                  <span className="card-text text-center fs-6">
-                    {cocktail.strInstructions}
+                  <span className="card-text text-center">
+                    {cocktail?.strInstructions}
                   </span>
                   <hr />
                   <h6 className="text-center bg-black">DE</h6>
 
                   <span className="card-text text-center fs-6">
-                    {cocktail.strInstructionsDE}
+                    {cocktail?.strInstructionsDE}
                   </span>
                   <hr />
-                  <h6 className="text-center bg-black">FR</h6>
+                  <h6 className="text-center bg-black">IT</h6>
                   <span className="card-text text-center fs-6">
-                    {cocktail.strInstructionsIT}
+                    {cocktail?.strInstructionsIT}
+                  </span>
+                  <hr />
+                  <span className="card-text fw-light text-center">
+                    Date Modified: {cocktail.dateModified}
                   </span>
                 </div>
               </div>

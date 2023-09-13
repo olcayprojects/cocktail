@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useCallback, useEffect } from "react";
 import axios from "axios";
 import CocktailIndex from "./CocktailIndex.jsx";
+import { useNavigate } from "react-router-dom";
 
 const ListFirstLetter = () => {
   const [loading, setLoading] = useState(false);
@@ -11,14 +12,14 @@ const ListFirstLetter = () => {
   const randomCharacter = alphabet[Math.floor(Math.random() * alphabet.length)];
 
   const [url, setUrl] = useState(
-    "https://www.thecocktaildb.com/api/json/v1/1/search.php?f=" +
-      randomCharacter +
-      ""
+    "https://www.thecocktaildb.com/api/json/v1/1/search.php?f=" + "y" + ""
   );
 
   const setIndex = (alpha) => {
     setUrl(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${alpha}`);
   };
+
+  let navigate = useNavigate();
 
   const fetchCocktail = useCallback(() => {
     setLoading(true);
@@ -41,67 +42,108 @@ const ListFirstLetter = () => {
   }
 
   return (
-    <div className="container-fluid m-2 bg-black">
-      <h6 className="text-center text-light bg-black">TheCocktailDB free JSON API</h6>
-      <div className="indexContainer">
+    <div className="container-fluid m-1 bg-black">
+      <h6 className="text-center text-light bg-black">
+        TheCocktailDB free JSON API
+      </h6>
+      <div className="d-flex">
         <CocktailIndex alphaIndex={(alpa) => setIndex(alpa)} />
       </div>
 
       <h1 className="text-center text-light bg-black">List First Letter</h1>
       <div className="row row-cols-1 row-cols-md-3 justify-content-md-center">
         {data?.map((cocktail) => (
-          <div key={cocktail.idDrink} className="col p-2">
-            <div className="card h-100 pt-2">
+          <div key={cocktail.idDrink} className="col">
+            <div className="card h-100">
               <img
                 className="card-img-top img-thumbnail"
-                src={cocktail.strDrinkThumb + "/preview"}
+                // src={cocktail.strDrinkThumb + "/preview"}
+                src="test.jpeg"
                 alt=""
               />
-              {/* <img className="card-img-top" src="test.jpeg" alt="" /> */}
               <div className="card-body">
                 <div className="card-img-overlay">
-                  <h1 className="card-title text-center text-info bg-black opacity-75">
+                  <h2 className="card-title text-center text-info bg-dark opacity-75 border rounded-2">
                     {cocktail.strDrink}
-                  </h1>
+                  </h2>{" "}
+                  {cocktail.strTags ? (
+                    <span className="card-title text-light bg-dark opacity-75 px-1">
+                      <span className="text-danger">Tags: </span>
+                      {cocktail.strTags}
+                    </span>
+                  ) : (
+                    ""
+                  )}
+                  <br />
+                  <span
+                    className="card-title text-light bg-dark opacity-75 px-1"
+                    onClick={() => {
+                      navigate(`/Category/${cocktail.strCategory}`);
+                    }}
+                  >
+                    <span className="text-danger">Category: </span>
+                    {cocktail.strCategory}
+                  </span>
+                  <br />
+                  {cocktail.strIBA ? (
+                    <span className="card-title text-light bg-dark opacity-75 px-1">
+                      <span className="text-danger">IBA: </span>
+                      {cocktail.strIBA}
+                    </span>
+                  ) : (
+                    ""
+                  )}
+                  <br />
+                  <span className="card-title text-light bg-dark opacity-75 px-1">
+                    <span className="text-danger">Alcoholic: </span>
+                    {cocktail.strAlcoholic}
+                  </span>
+                  <br />
+                  <span
+                    className="card-title text-light bg-dark opacity-75 px-1"
+                    onClick={() => {
+                      navigate(`/Glass/${cocktail.strGlass}`);
+                    }}
+                  >
+                    <span className="text-danger">Glass: </span>
+                    {cocktail.strGlass}
+                  </span>
                 </div>
 
-                <h6 className="card-title text-warning">
-                  <span className="text-danger">Tags: </span>
-                  {cocktail.strTags ? cocktail.strTags :"No Tags" }
-                </h6>
-                <h6 className="card-title text-warning">
-                  <span className="text-danger">Category: </span>
-                  {cocktail.strCategory}
-                </h6>
-                <h6 className="card-title text-warning">
-                  <span className="text-danger">IBA: </span>
-                  {cocktail.strIBA}
-                </h6>
-                <h6 className="card-title text-warning">
-                  <span className="text-danger">Alcoholic: </span>
-                  {cocktail.strAlcoholic}
-                </h6>
-                <h6 className="card-title text-warning">
-                  <span className="text-danger">Glass: </span>
-                  {cocktail.strGlass}
-                </h6>
-                <hr />
                 <h5 className="card-title text-info text-center fw-bold text-decoration-underline text-uppercase">
                   Ingredients
                 </h5>
 
-                <ul className="list-group">
+                <ul className="list-group list-group-horizontal text-center flex-wrap justify-content-md-center fst-italic">
                   {[...Array(15)].map((x, i) =>
                     cocktail["strIngredient" + (i + 1)] ? (
                       <li
                         key={i}
-                        className="list-group-item fw-bold text-success"
+                        className="border border-black p-0 mb-1 list-group-item text-black fw-bold bg-secondary"
                       >
-                        {(cocktail["strMeasure" + (i + 1)] !== null
+                        <img
+                          className="img-fluid bg-black"
+                          src={`https://www.thecocktaildb.com/images/ingredients/${
+                            cocktail["strIngredient" + (i + 1)]
+                          }-Small.png`}
+                          alt=""
+                        />
+                        <br />
+                        {cocktail["strMeasure" + (i + 1)] !== null
                           ? cocktail["strMeasure" + (i + 1)]
-                          : "") +
-                          " " +
-                          cocktail["strIngredient" + (i + 1)]}
+                          : ""}
+                        <span
+                          onClick={() => {
+                            navigate(
+                              `/Ingredient/${
+                                cocktail["strIngredient" + (i + 1)]
+                              }`
+                            );
+                          }}
+                        >
+                          {" "}
+                          {cocktail["strIngredient" + (i + 1)]}
+                        </span>
                       </li>
                     ) : (
                       ""

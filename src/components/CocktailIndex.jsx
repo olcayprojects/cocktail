@@ -24,7 +24,6 @@ const CocktailIndex = ({ alphaIndex }) => {
     "U",
     "V",
     "W",
-    "X",
     "Y",
     "Z",
   ];
@@ -34,11 +33,15 @@ const CocktailIndex = ({ alphaIndex }) => {
       {alpha.map((item) => {
         return (
           <div
-            className="numBox mx-auto"
+            className="btn-group rounded-2 mx-auto border-bottom border-4 border-info"
+            role="group"
             key={num++}
             onClick={() => alphaIndex(item)}
           >
-            <button type="button" className="btn btn-warning fs-4">
+            <button
+              type="button"
+              className="btn btn-outline-info btn-lg fw-bold text-success"
+            >
               {item}
             </button>
           </div>

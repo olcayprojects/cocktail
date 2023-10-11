@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useCallback, useEffect } from "react";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const Ingredient = () => {
   const [loading, setLoading] = useState(false);
@@ -13,7 +13,7 @@ const Ingredient = () => {
     `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ingredient}`
   );
 
-  let navigate = useNavigate();
+  // let navigate = useNavigate();
 
   const fetchCocktail = useCallback(() => {
     setLoading(true);

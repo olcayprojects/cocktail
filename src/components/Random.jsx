@@ -1,6 +1,10 @@
 import React from "react";
 import { useState, useCallback, useEffect } from "react";
 import axios from "axios";
+import Menu from "./Menu";
+import Button from "react-bootstrap/Button";
+import ListGroup from "react-bootstrap/ListGroup";
+import Image from "react-bootstrap/Image";
 
 function Random() {
   const [loading, setLoading] = useState(false);
@@ -29,6 +33,7 @@ function Random() {
   }
   return (
     <div className="App m-2">
+      <Menu />
       {data.map((cocktail) => (
         <div className="container" key={cocktail.idDrink}>
           <h1 className="text-center text-warning bg-black">Random Cocktail</h1>
@@ -42,28 +47,36 @@ function Random() {
           <h2 className="text-center text-info bg-black">
             {cocktail.strDrink}
           </h2>
-          <ul className="list-group list-group-flush">
+          <ListGroup as="ol" horizontal>
             {[...Array(15)].map((x, i) =>
               cocktail["strIngredient" + (i + 1)] ? (
-                <li className="list-group-item">
-                  {(cocktail["strMeasure" + (i + 1)] !== "null"
+                <ListGroup.Item as="li" key={i}>
+                  <Image
+                    src={`https://www.thecocktaildb.com/images/ingredients/${
+                      cocktail["strIngredient" + (i + 1)]
+                    }-Small.png`}
+                    alt=""
+                    thumbnail   
+                    
+                  />
+                  {(cocktail["strMeasure" + (i + 1)] !== null
                     ? cocktail["strMeasure" + (i + 1)]
                     : "") +
                     " " +
                     cocktail["strIngredient" + (i + 1)]}
-                </li>
+                </ListGroup.Item>
               ) : (
                 ""
               )
             )}
-          </ul>
+          </ListGroup>
           <hr />
           <span className="text-center fs-6">{cocktail.strInstructions}</span>
-
-          <div className="d-grid gap-2 col-6 mx-auto bg-black">
-            <button className="btn btn-outline-primary" onClick={fetchCocktail}>
+          <br />
+          <div className="d-grid">
+            <Button onClick={fetchCocktail} variant="outline-warning" size="lg">
               Change Cocktail
-            </button>
+            </Button>
           </div>
         </div>
       ))}

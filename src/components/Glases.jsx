@@ -1,8 +1,12 @@
 import React from "react";
 import { useState, useCallback, useEffect } from "react";
 import axios from "axios";
+import Menu from "./Menu";
+import { useNavigate } from "react-router-dom";
+
 
 const Glases = () => {
+  let navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
 
@@ -30,13 +34,15 @@ const Glases = () => {
 
   return (
     <div>
+      <Menu />
       <h1 className="text-center">Glass</h1>
-      {data.map((cocktail) => (
-        <div className="container" key={cocktail.idDrink}>
-          <h5 className="text-center text-info bg-black">
+      {data.map((cocktail,index) => (
+          <span className="text-center btn btn-success m-2" key={index}
+          onClick={() => {
+            navigate(`/Glass/${cocktail.strGlass}`);
+          }}>
             {cocktail.strGlass}
-          </h5>
-        </div>
+          </span>
       ))}
     </div>
   );

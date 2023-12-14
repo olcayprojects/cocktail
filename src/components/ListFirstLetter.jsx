@@ -78,7 +78,7 @@ const ListFirstLetter = () => {
                     <img
                       src={cocktail.strDrinkThumb}
                       className="img-fluid object-fit-fill w-100"
-                      style={{ height: "50px" }}
+                      style={{ height: "60px" }}
                       alt=""
                       srcSet=""
                     />
@@ -89,13 +89,32 @@ const ListFirstLetter = () => {
                       navigate(`/Details/${cocktail.idDrink}`);
                     }}
                   >
-                    {cocktail.strDrink}
+                    
+                    <span className="btn btn-outline-warning">{cocktail.strDrink}</span>
                   </td>
                   <td>{cocktail.strTags}</td>
-                  <td>{cocktail.strCategory}</td>
+                  <td
+                    className="cp"
+                    onClick={() => {
+                      navigate(
+                        `/Category/${encodeURIComponent(cocktail.strCategory)}`
+                      );
+                    }}
+                  >
+                    <span className="btn btn-outline-danger">{cocktail.strCategory}</span>
+                  </td>
                   <td>{cocktail.strIBA}</td>
                   <td>{cocktail.strAlcoholic}</td>
-                  <td>{cocktail.strGlass}</td>
+                  <td
+                    className="cp "
+                    onClick={() => {
+                      navigate(
+                        `/Glass/${encodeURIComponent(cocktail.strGlass)}`
+                      );
+                    }}
+                  >
+                    <span className="btn btn-outline-info">{cocktail.strGlass}</span>
+                  </td>
                 </tr>
               ))}
             </tbody>

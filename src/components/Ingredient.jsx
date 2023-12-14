@@ -2,10 +2,13 @@ import React from "react";
 import { useState, useCallback, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import Menu from "./Menu";
 
 const Ingredient = () => {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
+  let navigate = useNavigate();
 
   const { ingredient } = useParams();
 
@@ -37,26 +40,37 @@ const Ingredient = () => {
 
   return (
     <div className="container-fluid m-2 bg-black">
-      <h6 className="text-center text-light bg-black">
-        TheCocktailDB free JSON API
-      </h6>
+      <Menu />
 
-      <h1 className="text-center text-light bg-black">{ingredient} ingredient List</h1>
-      <div className="row row-cols-1 row-cols-md-4 justify-content-md-center">
+      <img
+        className="rounded mx-auto d-block bg-black"
+        src={`https://www.thecocktaildb.com/images/ingredients/${ingredient}-Small.png`}
+        alt=""
+      />
+      <h1 className="text-center text-light bg-black">
+        {ingredient} ingredient List
+      </h1>
+
+      <div className="row row-cols-1 row-cols-md-auto justify-content-md-center">
         {data?.map((cocktail) => (
           <div key={cocktail.idDrink} className="col p-1">
-            <div className="card h-100">
+            <div
+              className="card h-100 cp"
+              onClick={() => {
+                navigate(`/Details/${cocktail.idDrink}`);
+              }}
+            >
               <img
                 className="card-img-top img-thumbnail"
-                // src={cocktail.strDrinkThumb + "/preview"}
-                src="/test.jpeg"
+                 src={cocktail.strDrinkThumb + "/preview"}
+                //src="/test.jpeg"
                 alt=""
               />
-              <div className="card-body">
+              <div className="card-body p-0">
                 <div className="card-img-overlay">
-                  <h3 className="card-title text-center text-info bg-dark opacity-75 border rounded-2">
+                  <h6 className="card-title text-center text-light bg-black opacity-75 border rounded-2">
                     {cocktail.strDrink}
-                  </h3>
+                  </h6>
                 </div>
               </div>
             </div>
@@ -67,5 +81,4 @@ const Ingredient = () => {
   );
 };
 
-
-export default Ingredient
+export default Ingredient;

@@ -40,8 +40,8 @@ function Random() {
 
           <img
             className="img-thumbnail mx-auto d-block m-1"
-            // src={cocktail.strDrinkThumb + "/preview"}
-            src="test.jpeg"
+            src={cocktail.strDrinkThumb + ""}
+            //src="test.jpeg"
             alt=""
           />
           <h2 className="text-center text-info bg-black">
@@ -50,20 +50,22 @@ function Random() {
           <ListGroup as="ol" horizontal>
             {[...Array(15)].map((x, i) =>
               cocktail["strIngredient" + (i + 1)] ? (
-                <ListGroup.Item as="li" key={i}>
-                  <Image
+                <ListGroup.Item as="li" variant="info" key={i}>
+                  <img
+                  className="rounded mx-auto d-block"
                     src={`https://www.thecocktaildb.com/images/ingredients/${
                       cocktail["strIngredient" + (i + 1)]
                     }-Small.png`}
                     alt=""
-                    thumbnail   
-                    
+                    thumbnail
                   />
-                  {(cocktail["strMeasure" + (i + 1)] !== null
-                    ? cocktail["strMeasure" + (i + 1)]
-                    : "") +
-                    " " +
-                    cocktail["strIngredient" + (i + 1)]}
+                  <h6 className="text-center">
+                    {(cocktail["strMeasure" + (i + 1)] !== null
+                      ? cocktail["strMeasure" + (i + 1)]
+                      : "") +
+                      " " +
+                      cocktail["strIngredient" + (i + 1)]}
+                  </h6>
                 </ListGroup.Item>
               ) : (
                 ""

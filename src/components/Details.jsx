@@ -153,7 +153,8 @@ const Details = (props) => {
                   <span className="card-text text-center fs-6 text-success">
                     {cocktail?.strInstructionsIT}
                   </span>
-                  <hr />}{/* language */}
+                  <hr />
+                  {/* language */}
                   <span className="card-text fw-light text-center">
                     Date Modified: {cocktail.dateModified}
                   </span>

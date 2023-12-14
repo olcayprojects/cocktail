@@ -32,7 +32,7 @@ const Categories = () => {
   }
 
   return (
-    <div>
+    <div className="bg-black">
       <Menu />
       <h1 className="text-center">Category</h1>
       {data.map((cocktail, index) => (
@@ -40,7 +40,7 @@ const Categories = () => {
           className="text-center btn btn-danger m-2"
           key={index}
           onClick={() => {
-            navigate(`/Category/${cocktail.strCategory}`);
+            navigate(`/Category/${encodeURIComponent(cocktail.strCategory)}`);
           }}
         >
           {cocktail.strCategory}

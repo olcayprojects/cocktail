@@ -4,7 +4,6 @@ import axios from "axios";
 import Menu from "./Menu";
 import { useNavigate } from "react-router-dom";
 
-
 const Ingredients = () => {
   let navigate = useNavigate();
   const [loading, setLoading] = useState(false);
@@ -33,21 +32,35 @@ const Ingredients = () => {
   }
 
   return (
-    <div>
+    <div className="bg-black">
       <Menu />
       <h1 className="text-center">Ingredients </h1>
-      <div className="container">
-      {data.map((cocktail,index) => (
-          <span className="btn btn-info m-2" key={index}
-          onClick={() => {
-            navigate(
-              `/Ingredient/${cocktail["strIngredient1"]}`
-            );
-          }}
-          >
-            {cocktail.strIngredient1}
-          </span>
-      ))}
+      <div className="container-fluid">
+        <div className="row row-cols-1 row-cols-md-6 justify-content-md-center">
+          {data.map((cocktail, index) => (
+            <div className="col p-1" key={index}>
+              <div
+                className="card cp"
+                onClick={() => {
+                  navigate(`/Ingredient/${cocktail["strIngredient1"]}`);
+                }}
+              >
+                <img
+                  className="card-img-top img-thumbnail"
+                  src={`https://www.thecocktaildb.com/images/ingredients/${cocktail["strIngredient1"]}-Small.png`}
+                  alt=""
+                />
+                <div className="card-body p-0">
+                  <div className="card-img-overlay">
+                    <h6 className="card-title text-center text-light bg-black opacity-75 border rounded-2">
+                      {cocktail.strIngredient1}
+                    </h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

@@ -33,13 +33,13 @@ const Glases = () => {
   }
 
   return (
-    <div>
+    <div className="bg-black container-fluid">
       <Menu />
       <h1 className="text-center">Glass</h1>
       {data.map((cocktail,index) => (
           <span className="text-center btn btn-success m-2" key={index}
           onClick={() => {
-            navigate(`/Glass/${cocktail.strGlass}`);
+            navigate(`/Glass/${encodeURIComponent(cocktail.strGlass)}`);
           }}>
             {cocktail.strGlass}
           </span>

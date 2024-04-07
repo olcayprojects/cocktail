@@ -13,7 +13,7 @@ const ListFirstLetter = () => {
   // const randomCharacter = alphabet[Math.floor(Math.random() * alphabet.length)];
 
   const [url, setUrl] = useState(
-    "https://www.thecocktaildb.com/api/json/v1/1/search.php?f=y"
+    "https://www.thecocktaildb.com/api/json/v1/1/search.php?f=A"
   );
 
   const setIndex = (alpha) => {
@@ -74,17 +74,17 @@ const ListFirstLetter = () => {
             <tbody>
               {data?.map((cocktail) => (
                 <tr key={cocktail.idDrink} className="align-middle">
-                  <td>
+                  <td className="col-2">
                     <img
                       src={cocktail.strDrinkThumb}
-                      className="img-fluid object-fit-fill w-100"
+                      className="img-fluid object-fit-fill h-100"
                       style={{ height: "60px" }}
                       alt=""
                       srcSet=""
                     />
                   </td>
                   <td
-                    className="cp align-middle"
+                    className="col-1 cp align-middle text-center p-0 m-0"
                     onClick={() => {
                       navigate(`/Details/${cocktail.idDrink}`);
                     }}
@@ -92,9 +92,9 @@ const ListFirstLetter = () => {
                     
                     <span className="btn btn-outline-warning">{cocktail.strDrink}</span>
                   </td>
-                  <td>{cocktail.strTags}</td>
+                  <td className="text-center col-1">{cocktail.strTags}</td>
                   <td
-                    className="cp"
+                    className="cp text-center col-1"
                     onClick={() => {
                       navigate(
                         `/Category/${encodeURIComponent(cocktail.strCategory)}`
@@ -103,10 +103,10 @@ const ListFirstLetter = () => {
                   >
                     <span className="btn btn-outline-danger">{cocktail.strCategory}</span>
                   </td>
-                  <td>{cocktail.strIBA}</td>
-                  <td>{cocktail.strAlcoholic}</td>
+                  <td className="col-1 text-center">{cocktail.strIBA}</td>
+                  <td className="text-center col-1">{cocktail.strAlcoholic}</td>
                   <td
-                    className="cp "
+                    className="cp text-center col-1"
                     onClick={() => {
                       navigate(
                         `/Glass/${encodeURIComponent(cocktail.strGlass)}`

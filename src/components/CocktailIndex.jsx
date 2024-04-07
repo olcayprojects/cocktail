@@ -40,7 +40,7 @@ const CocktailIndex = ({ alphaIndex }) => {
           >
             <button
               type="button"
-              className="btn btn-outline-info btn-lg fw-bold text-success"
+              className="btn btn-outline-info btn-lg fw-bold text-light"
             >
               {item}
             </button>
